@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bft3bspicyvel"]
 
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
+[ext_resource type="Script" uid="uid://cca7qk2ty5h8l" path="res://src/scenes/main/bullet.gd" id="2_4rfip"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +18,8 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_rjqdx"]
 size = Vector3(50, 0, 50)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hsw67"]
 
 [node name="Main" type="Node3D" unique_id=1341778376]
 
@@ -38,3 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5737287, 0)
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.2841048, 0)
 projection = 1
 size = 5.0
+
+[node name="Bullet" type="Area3D" parent="." unique_id=1667648992]
+script = ExtResource("2_4rfip")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bullet" unique_id=1402562877]
+shape = SubResource("SphereShape3D_hsw67")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bullet" unique_id=341120251]

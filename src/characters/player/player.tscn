@@ -18,3 +18,6 @@ mesh = SubResource("CapsuleMesh_1r1iw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=198125600]
 shape = SubResource("CapsuleShape3D_bxhu7")
+
+[node name="Muzzle" type="Node3D" parent="." unique_id=783485655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
