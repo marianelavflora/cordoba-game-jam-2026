@@ -3,7 +3,6 @@ extends CharacterBody3D
 
 const SPEED := 5.0
 const MOUSE_SENSITIVITY := 0.002
-const CAM_ANGLE_LIMIT := 70.0
 
 @onready var camera: Camera3D = $Camera3D
 
@@ -23,15 +22,6 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	_update_velocity(direction)
 	move_and_slide()
-
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
-		camera.rotation_degrees.x = clampf(
-			camera.rotation_degrees.x, -CAM_ANGLE_LIMIT, CAM_ANGLE_LIMIT
-		)
 
 
 func _update_velocity(dir: Vector3) -> void:
