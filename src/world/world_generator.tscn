@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bje5pf8i68lyw" path="res://src/world/layout_generator.gd" id="1_t2yth"]
 [ext_resource type="Script" uid="uid://bh7msqcaafqvv" path="res://src/world/room_placer.gd" id="2_com0c"]
+[ext_resource type="Script" uid="uid://bgtdt1ak2dv2q" path="res://src/world/minimap.gd" id="3_tqwjo"]
 
 [node name="WorldGenerator" type="Node3D" unique_id=551505807]
 
@@ -11,4 +12,28 @@ script = ExtResource("1_t2yth")
 [node name="RoomPlacer" type="Node3D" parent="." unique_id=561831425]
 script = ExtResource("2_com0c")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1655802742]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1822751148]
+clip_children = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 112.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Minimap" type="Control" parent="CanvasLayer/ColorRect" unique_id=855413054]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_tqwjo")
+
 [connection signal="layout_generated" from="LayoutGenerator" to="RoomPlacer" method="_on_layout_generator_layout_generated"]
+[connection signal="layout_generated" from="LayoutGenerator" to="CanvasLayer/ColorRect/Minimap" method="_on_layout_generator_layout_generated"]

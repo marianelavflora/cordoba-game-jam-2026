@@ -3,7 +3,10 @@ extends Node3D
 
 
 const ROOM_SIZE: Vector3 = Vector3(13.5, 0.0, 10.0)
-
+const NEIGHBORS := [
+	Vector2i.LEFT, Vector2i.RIGHT,
+	Vector2i.UP, Vector2i.DOWN
+]
 
 
 static func get_room_size_2d() -> Vector2:
@@ -20,3 +23,8 @@ func _on_layout_generator_layout_generated(grid: Dictionary[Vector2i, RoomData])
 		var room: Node3D = scene.instantiate()
 		room.position = Vector3(cell.x, 0, cell.y) * ROOM_SIZE
 		add_child(room)
+		var exits: Array[Vector2i]
+		for neighbor in NEIGHBORS:
+			if grid.has(cell + neighbor):
+				exits.append(neighbor)
+		room.initialize.call_deferred(exits)

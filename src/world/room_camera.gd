@@ -8,11 +8,16 @@ const HEIGHT := 5.0
 var current_room: Vector2i = Vector2i.ZERO :
 	set(value):
 		current_room = value
-		global_position = Vector3(
-			current_room.x * RoomPlacer.ROOM_SIZE.x,
-			HEIGHT,
-			current_room.y * RoomPlacer.ROOM_SIZE.z
+		var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(
+			self, "global_position", 
+			Vector3(
+				current_room.x * RoomPlacer.ROOM_SIZE.x,
+				HEIGHT,
+				current_room.y * RoomPlacer.ROOM_SIZE.z + 0.85
+			), 0.1
 		)
+		#global_position = global_position.lerp(, 0.25)
 
 
 func _process(delta: float) -> void:
