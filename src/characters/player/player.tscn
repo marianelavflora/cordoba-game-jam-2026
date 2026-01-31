@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bed7buvicymhv"]
 
 [ext_resource type="Script" uid="uid://docupuypoiji8" path="res://src/characters/player/player.gd" id="1_bxhu7"]
+[ext_resource type="ArrayMesh" uid="uid://0qh0fh3p6ubj" path="res://assets/objs/Personaje002.obj" id="2_7nd6e"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1r1iw"]
-radius = 0.25
-height = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nd6e"]
+albedo_color = Color(0.8644701, 0.6866816, 0.7040334, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bxhu7"]
 radius = 0.25
@@ -19,9 +19,13 @@ fire_rate = null
 bullet_speed = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=571309924]
-mesh = SubResource("CapsuleMesh_1r1iw")
+transform = Transform3D(0.25, 0, 0, 0, 0.23556992, 0.08370668, 0, -0.08370668, 0.23556992, 0, 0, 0)
+cast_shadow = 0
+mesh = ExtResource("2_7nd6e")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nd6e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=198125600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40177602, 0)
 shape = SubResource("CapsuleShape3D_bxhu7")
 
 [node name="Muzzle" type="Node3D" parent="." unique_id=783485655]

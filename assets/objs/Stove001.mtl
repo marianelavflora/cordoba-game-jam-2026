@@ -1,0 +1,43 @@
+# Blender MTL File: 'SiloPot Collapse Cycles2.blend'
+# Material Count: 4
+
+newmtl Eeeve_Glass
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Eevee_Metal_Black
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.032315 0.032315 0.032315
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Eevee_Metal_Silver
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.047263 0.047263 0.047263
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Ns C:\\Users\\hamoo\\AppData\\Local\\OctaneRender\\cache\\texCache\\assets\\chestnut Rushmore spec roug.jpg
+
+newmtl Eevee_Stove_
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2

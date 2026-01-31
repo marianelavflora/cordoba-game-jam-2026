@@ -17,7 +17,8 @@ const MIN_ROOMS: int = 6
 const MAX_ROOMS: int = 8
 const ROOM_WEIGHTS := {
 	preload("res://src/world/resources/data/room_1.tres"): 1,
-	preload("res://src/world/resources/data/room_2.tres"): 1
+	preload("res://src/world/resources/data/room_2.tres"): 1,
+	preload("res://src/world/resources/data/room_3.tres"): 2
 }
 
 
