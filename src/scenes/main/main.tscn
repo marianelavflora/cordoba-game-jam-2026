@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bft3bspicyvel"]
 
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
-[ext_resource type="Script" path="res://src/scenes/main/bullet.gd" id="2_4rfip"]
+[ext_resource type="Script" uid="uid://cca7qk2ty5h8l" path="res://src/scenes/main/bullet.gd" id="2_4rfip"]
 [ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
 [ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
+[ext_resource type="Script" uid="uid://bgtdt1ak2dv2q" path="res://src/world/minimap.gd" id="5_fub2y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -56,3 +57,31 @@ script = ExtResource("3_vw57g")
 player = NodePath("../Player")
 
 [node name="WorldGenerator" parent="." unique_id=551505807 instance=ExtResource("4_fub2y")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1909567033]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1276511466]
+clip_children = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 112.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Minimap" type="Control" parent="CanvasLayer/ColorRect" unique_id=544645482]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_fub2y")
+
+[connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/ColorRect/Minimap" method="_on_camera_3d_player_room_changed"]
+[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer/ColorRect/Minimap" method="_on_layout_generator_layout_generated"]
+
+[editable path="WorldGenerator"]
