@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bft3bspicyvel"]
 
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
-[ext_resource type="Script" path="res://src/scenes/main/bullet.gd" id="2_4rfip"]
 [ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
 [ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
+[ext_resource type="Script" uid="uid://3e1m1iqijjjo" path="res://src/characters/enemies/enemy_spawner.gd" id="4_vw57g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,8 +20,6 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_rjqdx"]
 size = Vector3(50, 0, 50)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_hsw67"]
 
 [node name="Main" type="Node3D" unique_id=1341778376]
 
@@ -40,14 +38,6 @@ mesh = SubResource("BoxMesh_rjqdx")
 [node name="Player" parent="." unique_id=637285054 instance=ExtResource("1_hsw67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5737287, 0)
 
-[node name="Bullet" type="Area3D" parent="." unique_id=1667648992]
-script = ExtResource("2_4rfip")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bullet" unique_id=1402562877]
-shape = SubResource("SphereShape3D_hsw67")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bullet" unique_id=341120251]
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=166280860 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 5, 0.85033894)
 projection = 1
@@ -56,3 +46,8 @@ script = ExtResource("3_vw57g")
 player = NodePath("../Player")
 
 [node name="WorldGenerator" parent="." unique_id=551505807 instance=ExtResource("4_fub2y")]
+
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=1247833858]
+script = ExtResource("4_vw57g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemySpawner" unique_id=466207177]

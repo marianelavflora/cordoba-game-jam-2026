@@ -14,6 +14,20 @@ const BULLET_SCENE: PackedScene = preload("res://src/characters/player/bullet.ts
 var _cooldown: float = 0.0
 var _aim_dir: Vector3 = Vector3(0, 0, 1) # fallback
 
+@export var max_hp: int = 6
+var hp: int = 6
+
+func _ready() -> void:
+	hp = max_hp
+	add_to_group("player")
+
+func take_damage(amount: int) -> void:
+	hp = max(hp - amount, 0)
+	print("Player HP:", hp)
+
+
+
+	
 func _physics_process(delta: float) -> void:
 	# ---- MOVIMIENTO (WASD) ----
 	var move_input: Vector2 = Input.get_vector(

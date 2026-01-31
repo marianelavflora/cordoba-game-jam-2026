@@ -1,11 +1,11 @@
 extends Area3D
 
-@export var speed: float = 14.0
-@export var lifetime: float = 1.2
+@export var speed: float = 10.0
+@export var lifetime: float = 2.0
 @export var damage: int = 1
 
 var direction: Vector3 = Vector3.ZERO
-var _time_alive: float = 0.0
+var _t: float = 0.0
 
 func _ready() -> void:
 	monitoring = true
@@ -15,8 +15,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	global_position += direction * speed * delta
 
-	_time_alive += delta
-	if _time_alive >= lifetime:
+	_t += delta
+	if _t >= lifetime:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
