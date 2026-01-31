@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bft3bspicyvel"]
 
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
-[ext_resource type="Script" uid="uid://cca7qk2ty5h8l" path="res://src/scenes/main/bullet.gd" id="2_4rfip"]
+[ext_resource type="Script" path="res://src/scenes/main/bullet.gd" id="2_4rfip"]
+[ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
+[ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -31,16 +33,12 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Floor" type="CSGMesh3D" parent="." unique_id=956286876]
+visible = false
 use_collision = true
 mesh = SubResource("BoxMesh_rjqdx")
 
 [node name="Player" parent="." unique_id=637285054 instance=ExtResource("1_hsw67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5737287, 0)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=965685501]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.2841048, 0)
-projection = 1
-size = 5.0
 
 [node name="Bullet" type="Area3D" parent="." unique_id=1667648992]
 script = ExtResource("2_4rfip")
@@ -49,3 +47,12 @@ script = ExtResource("2_4rfip")
 shape = SubResource("SphereShape3D_hsw67")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Bullet" unique_id=341120251]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=166280860 node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+projection = 1
+size = 10.0
+script = ExtResource("3_vw57g")
+player = NodePath("../Player")
+
+[node name="WorldGenerator" parent="." unique_id=551505807 instance=ExtResource("4_fub2y")]
