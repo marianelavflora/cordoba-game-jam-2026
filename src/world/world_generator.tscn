@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bje5pf8i68lyw" path="res://src/world/layout_generator.gd" id="1_t2yth"]
 [ext_resource type="Script" uid="uid://bh7msqcaafqvv" path="res://src/world/room_placer.gd" id="2_com0c"]
+[ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="2_tqwjo"]
+[ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="4_4a00b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_com0c"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,9 +24,10 @@ glow_enabled = true
 script = ExtResource("1_t2yth")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1420443281]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.2841048, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
 projection = 1
-size = 50.0
+size = 10.0
+script = ExtResource("2_tqwjo")
 
 [node name="RoomPlacer" type="Node3D" parent="." unique_id=561831425]
 script = ExtResource("2_com0c")
@@ -35,5 +38,8 @@ environment = SubResource("Environment_tqwjo")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1733955859]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Player" parent="." unique_id=637285054 instance=ExtResource("4_4a00b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [connection signal="layout_generated" from="LayoutGenerator" to="RoomPlacer" method="_on_layout_generator_layout_generated"]

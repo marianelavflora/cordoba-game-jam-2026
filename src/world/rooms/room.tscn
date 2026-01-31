@@ -4,3 +4,19 @@
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1360159522]
 size = Vector3(13.5, 0, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1186036740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.616198, 0.9125366, 0)
+size = Vector3(0.2, 1.825, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=2113532230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.609336, 0.9125366, 0)
+size = Vector3(0.2, 1.825, 10)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=359396392]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.033164486, 0.9125366, 4.8358307)
+size = Vector3(0.38085938, 1.8250732, 13.3573)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=260152024]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.022361295, 0.9125366, -4.9153976)
+size = Vector3(0.2, 1.825, 13.379)
