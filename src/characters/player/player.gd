@@ -12,24 +12,22 @@ extends CharacterBody3D
 const BULLET_SCENE: PackedScene = preload("res://src/characters/player/bullet.tscn")
 
 var _cooldown: float = 0.0
-var _aim_dir: Vector3 = Vector3(0, 0, 1)
+var _aim_dir: Vector3 = Vector3(0, 0, 1) # fallback
 
 func _physics_process(delta: float) -> void:
-	# ---- MOVIMIENTO ----
+	# ---- MOVIMIENTO (WASD) ----
 	var move_input: Vector2 = Input.get_vector(
 		&"move_left", &"move_right",
 		&"move_forward", &"move_backward"
 	)
 
 	var move_dir := Vector3(move_input.x, 0.0, move_input.y)
+	var desired_velocity := Vector3.ZERO
 
 	if move_dir.length() > 0.0:
 		move_dir = move_dir.normalized()
-		_aim_dir = move_dir
+		desired_velocity = move_dir * move_speed
 
-	var desired_velocity := move_dir * move_speed
-
-	if move_input.length() > 0.0:
 		velocity.x = move_toward(velocity.x, desired_velocity.x, accel * delta)
 		velocity.z = move_toward(velocity.z, desired_velocity.z, accel * delta)
 	else:
@@ -39,11 +37,42 @@ func _physics_process(delta: float) -> void:
 	velocity.y = 0.0
 	move_and_slide()
 
-	# ---- DISPARO ----
+	# ---- AIM por mouse (independiente del movimiento) ----
+	var mouse_aim := _get_mouse_aim_dir()
+	if mouse_aim != Vector3.ZERO:
+		_aim_dir = mouse_aim
+
+	# ---- DISPARO (Left Click via action "shoot") ----
 	_cooldown = maxf(_cooldown - delta, 0.0)
 
 	if Input.is_action_pressed(&"shoot"):
 		_try_shoot()
+
+func _get_mouse_aim_dir() -> Vector3:
+	var cam := get_viewport().get_camera_3d()
+	if cam == null:
+		return Vector3.ZERO
+
+	var mouse_pos := get_viewport().get_mouse_position()
+	var ray_origin := cam.project_ray_origin(mouse_pos)
+	var ray_dir := cam.project_ray_normal(mouse_pos)
+
+	var plane := Plane(Vector3.UP, global_position.y)
+
+	# intersects_ray devuelve Vector3 o null (Variant). Evitamos inferencia.
+	var hit_variant = plane.intersects_ray(ray_origin, ray_dir)
+	if hit_variant == null:
+		return Vector3.ZERO
+
+	var hit: Vector3 = hit_variant
+	var to_hit: Vector3 = hit - global_position
+	to_hit.y = 0.0
+
+	if to_hit.length() == 0.0:
+		return Vector3.ZERO
+
+	return to_hit.normalized()
+
 
 func _try_shoot() -> void:
 	if _cooldown > 0.0:

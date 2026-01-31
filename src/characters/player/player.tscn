@@ -12,6 +12,11 @@ height = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=637285054]
 script = ExtResource("1_bxhu7")
+move_speed = null
+accel = null
+friction = null
+fire_rate = null
+bullet_speed = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=571309924]
 mesh = SubResource("CapsuleMesh_1r1iw")

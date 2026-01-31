@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://bw4okjat73d66"
-path="res://.godot/imported/Personaje001.obj-c30ca09895c28937d1ddc611f41c5e78.mesh"
+path="res://.godot/imported/Personaje001.obj-93935cffcf80b7c51762b3bf387ae259.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Personaje001.obj-c30ca09895c28937d1ddc611f41c5e78.mesh"]
+files=["res://.godot/imported/Personaje001.obj-93935cffcf80b7c51762b3bf387ae259.mesh"]
 
-source_file="res://OBJs/Personaje001.obj"
-dest_files=["res://.godot/imported/Personaje001.obj-c30ca09895c28937d1ddc611f41c5e78.mesh", "res://.godot/imported/Personaje001.obj-c30ca09895c28937d1ddc611f41c5e78.mesh"]
+source_file="res://assets/objs/Personaje001.obj"
+dest_files=["res://.godot/imported/Personaje001.obj-93935cffcf80b7c51762b3bf387ae259.mesh", "res://.godot/imported/Personaje001.obj-93935cffcf80b7c51762b3bf387ae259.mesh"]
 
 [params]
 
