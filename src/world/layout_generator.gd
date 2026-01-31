@@ -1,4 +1,4 @@
-class_name WorldGenManager
+class_name LayoutGenerator
 extends Node
 
 ## Parámetros de la generación.
@@ -24,11 +24,23 @@ class Walker:
 	var dir: Vector2i 
 	var pos: Vector2i 
 
+
+
+func _ready() -> void:
+	generate_grid()
+	
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"ui_accept"):
+		generate_grid()
+	
+	
 func generate_grid() -> void:
+	grid.clear()
 	var starting_position: Vector2i = Vector2i.ZERO
 
 	var walkers: Array[Walker]
-	var walked_cells: Array[Vector3i]
+	var walked_cells: Array[Vector2i]
 
 	var iterations: int = 0
 
@@ -61,7 +73,10 @@ func generate_grid() -> void:
 				break
 
 		iterations += 1
-
+	
+	for cell in walked_cells:
+		grid.set(cell, RoomData.new())
+	
 
 func _add_walker(pos: Vector2i, array: Array[Walker]) -> void:
 	var walker: Walker = Walker.new()
@@ -72,7 +87,6 @@ func _add_walker(pos: Vector2i, array: Array[Walker]) -> void:
 			Vector2.RIGHT,
 			Vector2.DOWN,
 			Vector2.UP
-		]
-		. pick_random()
+		].pick_random()
 	)
 	array.append(walker)

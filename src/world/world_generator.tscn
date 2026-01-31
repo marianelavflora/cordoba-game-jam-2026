@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bw3qfmuakh766"]
+
+[ext_resource type="Script" uid="uid://bje5pf8i68lyw" path="res://src/world/layout_generator.gd" id="1_t2yth"]
+
+[node name="WorldGenerator" type="Node3D" unique_id=551505807]
+
+[node name="LayoutGenerator" type="Node" parent="." unique_id=551301900]
+script = ExtResource("1_t2yth")
