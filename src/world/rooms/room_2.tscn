@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://nw1v7rw2dkdw"]
+
+[ext_resource type="PackedScene" uid="uid://b5dk77lavbqeg" path="res://src/world/rooms/room.tscn" id="1_t3t8p"]
+
+[node name="Room" unique_id=1368666116 instance=ExtResource("1_t3t8p")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" parent_id_path=PackedInt32Array(1360159522) index="0" unique_id=1304701870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50405574, 0)

@@ -1,6 +1,9 @@
 class_name LayoutGenerator
 extends Node
 
+
+signal layout_generated(grid: Dictionary[Vector2i, RoomData])
+
 ## Parámetros de la generación.
 const ROTATION_WEIGHTS := {
 	PI * 0.5: 1,
@@ -12,6 +15,10 @@ const NEW_WALKER_CHANCE: float = 0.2
 const DESTROY_WALKER_CHANCE: float = 0.2
 const MIN_ROOMS: int = 6
 const MAX_ROOMS: int = 8
+const ROOM_WEIGHTS := {
+	preload("res://src/world/resources/data/room_1.tres"): 1,
+	preload("res://src/world/resources/data/room_2.tres"): 1
+}
 
 
 ## Grilla con las distintas habitaciones.
@@ -51,6 +58,8 @@ func generate_grid() -> void:
 
 	while iterations < 10000 and walked_cells.size() < amount:
 		for walker in walkers:
+			if not walked_cells.has(walker.pos):
+				walked_cells.append(walker.pos)
 			if rng.randf() <= DESTROY_WALKER_CHANCE and walkers.size() > 1:
 				walkers.erase(walker)
 				continue
@@ -60,14 +69,13 @@ func generate_grid() -> void:
 
 			if rng.randf() <= DIRECTION_CHANGE_CHANCE:
 				var direction: int = rng.rand_weighted(ROTATION_WEIGHTS.values())
-				walker.dir = Vector2(walker.dir).rotated(
+				walker.dir = Vector2i(Vector2(walker.dir).rotated(
 					ROTATION_WEIGHTS.keys()[direction]
-				).round()
+				))
+				print(walker.dir)
 
 			walker.pos += walker.dir
 
-			if not walked_cells.has(walker.pos):
-				walked_cells.append(walker.pos)
 
 			if walked_cells.size() >= amount:
 				break
@@ -75,7 +83,8 @@ func generate_grid() -> void:
 		iterations += 1
 	
 	for cell in walked_cells:
-		grid.set(cell, RoomData.new())
+		grid.set(cell, ROOM_WEIGHTS.keys()[rng.rand_weighted(ROOM_WEIGHTS.values())])
+	layout_generated.emit(grid)
 	
 
 func _add_walker(pos: Vector2i, array: Array[Walker]) -> void:
