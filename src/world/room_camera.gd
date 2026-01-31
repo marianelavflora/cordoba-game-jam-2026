@@ -1,7 +1,7 @@
 extends Camera3D
 
 
-@onready var player: CharacterBody3D = $"../Player"
+@export var player: CharacterBody3D
 
 const HEIGHT := 5.0
 
@@ -16,8 +16,8 @@ var current_room: Vector2i = Vector2i.ZERO :
 
 
 func _process(delta: float) -> void:
-	current_room = _get_current_room(player.global_position)
-	print(current_room)
+	if is_instance_valid(player):
+		current_room = _get_current_room(player.global_position)
 	
 	
 func _get_current_room(from_position: Vector3) -> Vector2i:
