@@ -1,29 +1,25 @@
 extends CharacterBody3D
 
-
-const SPEED := 5.0
-const MOUSE_SENSITIVITY := 0.002
-
-@onready var camera: Camera3D = $Camera3D
-
-
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+@export var move_speed: float = 6.0
+@export var accel: float = 30.0
+@export var friction: float = 40.0
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	var input_dir := Input.get_vector(
-		&"move_left", &"move_right", 
+	# Movimiento tipo top-down en el plano X/Z (Y siempre 0)
+	var input_dir: Vector2 = Input.get_vector(
+		&"move_left", &"move_right",
 		&"move_forward", &"move_backward"
 	)
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	_update_velocity(direction)
+
+	var desired_velocity := Vector3(input_dir.x, 0.0, input_dir.y) * move_speed
+
+	# Aceleración cuando hay input, fricción cuando no hay
+	if input_dir.length() > 0.0:
+		velocity.x = move_toward(velocity.x, desired_velocity.x, accel * delta)
+		velocity.z = move_toward(velocity.z, desired_velocity.z, accel * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+		velocity.z = move_toward(velocity.z, 0.0, friction * delta)
+
+	velocity.y = 0.0
 	move_and_slide()
-
-
-func _update_velocity(dir: Vector3) -> void:
-	velocity.x = lerpf(velocity.x, dir.x * SPEED, 0.2)
-	velocity.z = lerpf(velocity.z, dir.z * SPEED, 0.2)
