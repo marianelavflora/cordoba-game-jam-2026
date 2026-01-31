@@ -1,0 +1,78 @@
+class_name WorldGenManager
+extends Node
+
+## Parámetros de la generación.
+const ROTATION_WEIGHTS := {
+	PI * 0.5: 1,
+	-PI * 0.5: 1,
+	PI: 0.5
+}
+const DIRECTION_CHANGE_CHANCE: float = 0.5
+const NEW_WALKER_CHANCE: float = 0.2
+const DESTROY_WALKER_CHANCE: float = 0.2
+const MIN_ROOMS: int = 6
+const MAX_ROOMS: int = 8
+
+
+## Grilla con las distintas habitaciones.
+var grid: Dictionary[Vector2i, RoomData] = {}
+
+
+## Se mueve en direcciones aleatorias para generar la
+## grilla.
+class Walker:
+	var dir: Vector2i 
+	var pos: Vector2i 
+
+func generate_grid() -> void:
+	var starting_position: Vector2i = Vector2i.ZERO
+
+	var walkers: Array[Walker]
+	var walked_cells: Array[Vector3i]
+
+	var iterations: int = 0
+
+	_add_walker(starting_position, walkers)
+
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	var amount: int = randi_range(MIN_ROOMS, MAX_ROOMS)
+
+	while iterations < 10000 and walked_cells.size() < amount:
+		for walker in walkers:
+			if rng.randf() <= DESTROY_WALKER_CHANCE and walkers.size() > 1:
+				walkers.erase(walker)
+				continue
+
+			if rng.randf() <= NEW_WALKER_CHANCE:
+				_add_walker(walker.pos, walkers)
+
+			if rng.randf() <= DIRECTION_CHANGE_CHANCE:
+				var direction: int = rng.rand_weighted(ROTATION_WEIGHTS.values())
+				walker.dir = Vector2(walker.dir).rotated(
+					ROTATION_WEIGHTS.keys()[direction]
+				).round()
+
+			walker.pos += walker.dir
+
+			if not walked_cells.has(walker.pos):
+				walked_cells.append(walker.pos)
+
+			if walked_cells.size() >= amount:
+				break
+
+		iterations += 1
+
+
+func _add_walker(pos: Vector2i, array: Array[Walker]) -> void:
+	var walker: Walker = Walker.new()
+	walker.pos = pos
+	walker.dir = (
+		[
+			Vector2.LEFT,
+			Vector2.RIGHT,
+			Vector2.DOWN,
+			Vector2.UP
+		]
+		. pick_random()
+	)
+	array.append(walker)
