@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://b5dk77lavbqeg"]
 
 [ext_resource type="Script" uid="uid://svjnuo3jweyr" path="res://src/world/rooms/room.gd" id="1_7avf4"]
+[ext_resource type="Texture2D" uid="uid://ledyb4ig0ga2" path="res://Texturas/9548.jpg" id="2_wasvu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
+albedo_texture = ExtResource("2_wasvu")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv2_world_triplanar = true
 
 [node name="Room" type="Node3D" unique_id=1368666116]
 script = ExtResource("1_7avf4")
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1360159522]
+material_override = SubResource("StandardMaterial3D_wasvu")
 use_collision = true
 size = Vector3(13.5, 0, 10)
 
