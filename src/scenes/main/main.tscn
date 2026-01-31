@@ -1,10 +1,35 @@
 [gd_scene format=3 uid="uid://bft3bspicyvel"]
 
+[ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_4rfip"]
+sky_material = SubResource("ProceduralSkyMaterial_hsw67")
+
+[sub_resource type="Environment" id="Environment_45uaa"]
+background_mode = 2
+sky = SubResource("Sky_4rfip")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_rjqdx"]
 size = Vector3(50, 0, 50)
 
 [node name="Main" type="Node3D" unique_id=1341778376]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=361748045]
+environment = SubResource("Environment_45uaa")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=822129662]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
 [node name="Floor" type="CSGMesh3D" parent="." unique_id=956286876]
 use_collision = true
 mesh = SubResource("BoxMesh_rjqdx")
+
+[node name="Player" parent="." unique_id=637285054 instance=ExtResource("1_hsw67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5737287, 0)
