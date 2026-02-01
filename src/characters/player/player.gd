@@ -12,6 +12,7 @@ extends CharacterBody3D
 @onready var audio_shoot: AudioStreamPlayer = $AudioShoot
 @onready var audio_hit: AudioStreamPlayer = $AudioHit
 const BULLET_SCENE: PackedScene = preload("res://src/characters/player/bullet.tscn")
+const GAME_OVER_SCENE: PackedScene = preload("res://src/ui/game_over.tscn")
 
 @export var rotation_speed: float = 10.0
 
@@ -136,16 +137,17 @@ func _rotate_towards_aim(delta: float) -> void:
 func die() -> void:
 	print("Player died")
 
-	# Opcional: detener movimiento y disparo
+	# Detener movimiento y disparo
 	set_physics_process(false)
 
-	# Opcional: desactivar colisión
+	# Desactivar colisión
 	if has_node("CollisionShape3D"):
 		$CollisionShape3D.disabled = true
 
-	# Opcional: ocultar el modelo
+	# Ocultar el modelo
 	if has_node("MeshInstance3D"):
 		$MeshInstance3D.visible = false
 
-	# Si querés destruirlo directamente:
-	queue_free()
+	# Mostrar pantalla de Game Over
+	var game_over := GAME_OVER_SCENE.instantiate()
+	get_tree().root.add_child(game_over)
