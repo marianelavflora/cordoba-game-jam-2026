@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
 [ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
 [ext_resource type="Script" uid="uid://3e1m1iqijjjo" path="res://src/characters/enemies/enemy_spawner.gd" id="4_vw57g"]
+[ext_resource type="Script" uid="uid://bgtdt1ak2dv2q" path="res://src/world/minimap.gd" id="5_minimap"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -58,3 +59,24 @@ player = NodePath("../Player")
 script = ExtResource("4_vw57g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EnemySpawner" unique_id=466207177]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Minimap" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 0.0
+anchor_right = 0.0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 148.0
+offset_bottom = 148.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("5_minimap")
+
+[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer/Minimap" method="_on_layout_generator_layout_generated"]
+[connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/Minimap" method="_on_camera_3d_player_room_changed"]
