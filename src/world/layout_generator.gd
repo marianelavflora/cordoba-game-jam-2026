@@ -38,11 +38,6 @@ func _ready() -> void:
 	generate_grid()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_accept"):
-		generate_grid()
-
-
 func generate_grid() -> void:
 	grid.clear()
 	var starting_position: Vector2i = Vector2i.ZERO

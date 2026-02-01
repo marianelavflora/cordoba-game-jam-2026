@@ -32,7 +32,7 @@ func take_damage(amount: int) -> void:
 
 
 
-	
+
 func _physics_process(delta: float) -> void:
 	# ---- MOVIMIENTO (WASD) ----
 	var move_input: Vector2 = Input.get_vector(

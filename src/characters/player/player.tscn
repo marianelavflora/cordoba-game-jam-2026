@@ -12,11 +12,6 @@ height = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=637285054]
 script = ExtResource("1_bxhu7")
-move_speed = null
-accel = null
-friction = null
-fire_rate = null
-bullet_speed = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=571309924]
 transform = Transform3D(0.25, 0, 0, 0, 0.23556992, 0.08370668, 0, -0.08370668, 0.23556992, 0, 0, 0)
