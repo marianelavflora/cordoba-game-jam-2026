@@ -3,7 +3,7 @@ extends Control
 
 const CELL_SIZE := Vector2i(16, 16)
 
-var layout: Dictionary = {}
+var layout: Dictionary[Vector2i, RoomData]
 var current_room: Vector2i = Vector2i.ZERO
 
 
@@ -13,10 +13,6 @@ func _on_layout_generator_layout_generated(grid: Dictionary[Vector2i, RoomData])
 	
 	
 func _draw() -> void:
-	# Background so minimap is visible over the 3D scene
-	draw_rect(Rect2(Vector2.ZERO, size), Color(0.1, 0.1, 0.15, 0.85))
-	if layout.is_empty():
-		return
 	for cell in layout:
 		draw_rect(
 			Rect2(Vector2((cell - current_room) * CELL_SIZE) + size / 2.0 - Vector2(CELL_SIZE) / 2.0, CELL_SIZE),

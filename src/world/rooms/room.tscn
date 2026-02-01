@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://svjnuo3jweyr" path="res://src/world/rooms/room.gd" id="1_7avf4"]
 [ext_resource type="Texture2D" uid="uid://ledyb4ig0ga2" path="res://Texturas/9548.jpg" id="2_wasvu"]
 [ext_resource type="Texture2D" uid="uid://h7w2wrd8askr" path="res://Texturas/whiteFloor.png" id="3_f5q8f"]
+[ext_resource type="Texture2D" path="res://Texturas/wall_green.jpg" id="4_walls"]
 [ext_resource type="PackedScene" uid="uid://nuwtpmjln7tl" path="res://src/characters/enemies/enemy1/enemy1.tscn" id="3_lrux5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
@@ -14,12 +15,14 @@ roughness = 0.9
 metallic = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_walls"]
-albedo_texture = ExtResource("3_f5q8f")
+albedo_texture = ExtResource("4_walls")
+albedo_color = Color(1, 1, 1, 1)
 roughness = 0.85
+metallic = 0.0
 rim_enabled = true
 rim = 0.12
 rim_tint = 0.04
-uv1_scale = Vector3(2, 2, 2)
+uv1_scale = Vector3(2.0, 2.0, 2.0)
 uv1_triplanar = true
 
 [node name="Room" type="Node3D" unique_id=1368666116]

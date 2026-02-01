@@ -1,5 +1,6 @@
 extends Node3D
 
+const WALL_TEXTURE_WAINSCOTING := "res://Texturas/wall_wainscoting.png"
 const WALL_TEXTURE_WHITE := "res://Texturas/wall_mall.png"
 const WALL_TEXTURE_BRICK := "res://Texturas/wall_brick.png"
 
@@ -17,13 +18,15 @@ const WALL_TEXTURE_BRICK := "res://Texturas/wall_brick.png"
 
 
 func _ready() -> void:
-	_apply_random_wall_texture()
+	pass
+	# Temporalmente deshabilitado para usar la textura del .tscn
+	# _apply_random_wall_texture()
 
 
 func _apply_random_wall_texture() -> void:
-	var textures: Array[String] = [WALL_TEXTURE_WHITE, WALL_TEXTURE_BRICK]
-	var chosen_path: String = textures.pick_random()
-	var tex: Texture2D = load(chosen_path) as Texture2D
+	var tex: Texture2D = load(WALL_TEXTURE_WAINSCOTING) as Texture2D
+	if tex == null:
+		tex = load(WALL_TEXTURE_WHITE) as Texture2D
 	if tex == null:
 		return
 	var base_material: Material = wall_left.material_override
