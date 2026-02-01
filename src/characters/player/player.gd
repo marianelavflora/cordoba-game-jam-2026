@@ -26,10 +26,16 @@ func _ready() -> void:
 	add_to_group("player")
 
 func take_damage(amount: int) -> void:
+	if hp <= 0:
+		return
+
 	hp = max(hp - amount, 0)
 	if audio_hit:
 		audio_hit.play() # no stop → mejor sensación de impacto
 	print("Player HP:", hp)
+
+	if hp <= 0:
+		die()
 
 
 
@@ -126,3 +132,20 @@ func _rotate_towards_aim(delta: float) -> void:
 		target_angle,
 		rotation_speed * delta
 	)
+
+func die() -> void:
+	print("Player died")
+
+	# Opcional: detener movimiento y disparo
+	set_physics_process(false)
+
+	# Opcional: desactivar colisión
+	if has_node("CollisionShape3D"):
+		$CollisionShape3D.disabled = true
+
+	# Opcional: ocultar el modelo
+	if has_node("MeshInstance3D"):
+		$MeshInstance3D.visible = false
+
+	# Si querés destruirlo directamente:
+	queue_free()

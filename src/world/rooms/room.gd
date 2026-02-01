@@ -5,7 +5,8 @@ const WALL_TEXTURE_WHITE := "res://Texturas/wall_mall.png"
 const WALL_TEXTURE_BRICK := "res://Texturas/wall_brick.png"
 const MIN_ENEMIES := 1
 const MAX_ENEMIES := 3
-const ENEMY_1 = preload("uid://nuwtpmjln7tl")
+const ENEMY_1 = preload("uid://nuwtpmjln7tl")  # Enemy1
+const ENEMY_2 = preload("uid://tldtdmn6ra7f")  # Enemy2 (Granny)
 
 @onready var walls: Dictionary[Vector2i, CSGBox3D] = {
 	Vector2i.LEFT: $Walls/WallLeft,
@@ -67,8 +68,14 @@ func _spawn_enemies() -> void:
 	var positions := enemies_pos.get_children()
 	positions.shuffle()
 	positions.resize(amount)
+	
+	# Array con ambos tipos de enemigos
+	var enemy_types := [ENEMY_1, ENEMY_2]
+	
 	for pos in positions:
-		var enemy: CharacterBody3D = ENEMY_1.instantiate()
+		# Elegir tipo de enemigo aleatoriamente
+		var enemy_scene: PackedScene = enemy_types.pick_random()
+		var enemy: CharacterBody3D = enemy_scene.instantiate()
 		enemy.position = pos.position
 		add_child(enemy)
 

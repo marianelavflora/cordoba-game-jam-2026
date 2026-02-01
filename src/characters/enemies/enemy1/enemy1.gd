@@ -13,7 +13,7 @@ var step_timer := 0.0
 @export var step_interval_run := 0.35
 
 @export var walk_speed: float = 2.0
-@export var run_speed: float = 4.5
+@export var run_speed: float = 4.0
 @export var state_time: float = 3.0
 @export var max_health: int = 7
 
