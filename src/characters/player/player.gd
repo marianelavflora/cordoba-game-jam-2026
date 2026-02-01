@@ -8,8 +8,8 @@ extends CharacterBody3D
 @export var bullet_speed: float = 14.0
 
 @onready var muzzle: Node3D = $Muzzle
-@onready var audiosource: AudioStreamPlayer = $AudioStreamPlayer
-
+@onready var audio_shoot: AudioStreamPlayer = $AudioShoot
+@onready var audio_hit: AudioStreamPlayer = $AudioHit
 const BULLET_SCENE: PackedScene = preload("res://src/characters/player/bullet.tscn")
 
 var _cooldown: float = 0.0
@@ -24,6 +24,8 @@ func _ready() -> void:
 
 func take_damage(amount: int) -> void:
 	hp = max(hp - amount, 0)
+	if audio_hit:
+		audio_hit.play() # no stop → mejor sensación de impacto
 	print("Player HP:", hp)
 
 
@@ -92,9 +94,9 @@ func _get_mouse_aim_dir() -> Vector3:
 func _try_shoot() -> void:
 	if _cooldown > 0.0:
 		return
-	if audiosource:
-		audiosource.stop()
-		audiosource.play()
+	if audio_shoot:
+		audio_shoot.stop()
+		audio_shoot.play()
 
 	var bullet := BULLET_SCENE.instantiate()
 	get_tree().current_scene.add_child(bullet)

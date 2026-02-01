@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bft3bspicyvel"]
 
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
+[ext_resource type="AudioStream" uid="uid://ckg5o3hwgqc0n" path="res://assets/sfx/Child Get Hitted 2.wav" id="2_3q0a4"]
+[ext_resource type="AudioStream" uid="uid://dvcwmsw2ix5cq" path="res://assets/sfx/hitnpc.wav" id="2_cx4eu"]
 [ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
 [ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
 [ext_resource type="Script" uid="uid://3e1m1iqijjjo" path="res://src/characters/enemies/enemy_spawner.gd" id="4_vw57g"]
@@ -29,7 +31,7 @@ environment = SubResource("Environment_45uaa")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=822129662]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = false
+shadow_enabled = true
 
 [node name="Floor" type="CSGMesh3D" parent="." unique_id=956286876]
 visible = false
@@ -44,7 +46,11 @@ friction = 40.0
 fire_rate = 6.0
 bullet_speed = 14.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player" unique_id=217064507]
+[node name="AudioShoot" type="AudioStreamPlayer" parent="Player" unique_id=217064507]
+stream = ExtResource("2_cx4eu")
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="Player" unique_id=1061697111]
+stream = ExtResource("2_3q0a4")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=166280860 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 5, 0.85033894)
@@ -60,11 +66,10 @@ script = ExtResource("4_vw57g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EnemySpawner" unique_id=466207177]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=822123450]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2138921635]
 layer = 10
 
-[node name="Minimap" type="Control" parent="CanvasLayer" unique_id=539880922]
-clip_contents = true
+[node name="Minimap" type="Control" parent="CanvasLayer" unique_id=1832924539]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
@@ -75,5 +80,4 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("5_minimap")
 
-[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer/Minimap" method="_on_layout_generator_layout_generated"]
 [connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/Minimap" method="_on_camera_3d_player_room_changed"]
