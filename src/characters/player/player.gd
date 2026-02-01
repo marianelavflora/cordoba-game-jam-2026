@@ -92,11 +92,15 @@ func _try_shoot() -> void:
 	if _cooldown > 0.0:
 		return
 
-	var bullet: Area3D = BULLET_SCENE.instantiate() as Area3D
+	var bullet := BULLET_SCENE.instantiate()
 	get_tree().current_scene.add_child(bullet)
 
-	bullet.global_position = muzzle.global_position
+	var spawn_offset := 0.35 # > radius (0.25) para salir de la cápsula
+	bullet.global_position = muzzle.global_position + _aim_dir * spawn_offset
 	bullet.direction = _aim_dir
 	bullet.speed = bullet_speed
+
+	# Pasamos quién disparó para ignorarlo en colisión
+	bullet.shooter = self
 
 	_cooldown = 1.0 / fire_rate
