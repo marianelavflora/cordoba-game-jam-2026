@@ -18,6 +18,7 @@ death_stream = ExtResource("4_1n826")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=337642674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90416193, 0)
 shape = SubResource("CapsuleShape3D_qb34h")
+debug_color = Color(6.738305e-07, 0.59681344, 0.71988434, 0.41960785)
 
 [node name="MeshAlive" type="MeshInstance3D" parent="." unique_id=1159972751]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.0534692, 0)

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
 [ext_resource type="Script" uid="uid://3e1m1iqijjjo" path="res://src/characters/enemies/enemy_spawner.gd" id="4_vw57g"]
 [ext_resource type="Script" uid="uid://bgtdt1ak2dv2q" path="res://src/world/minimap.gd" id="5_minimap"]
+[ext_resource type="Script" uid="uid://cvftqrdp1mcbb" path="res://src/scenes/main/health_bar.gd" id="8_4harg"]
 [ext_resource type="AudioStream" uid="uid://7w3i28pa0ejs" path="res://assets/music/trackardo.mp3" id="8_fup5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
@@ -41,17 +42,14 @@ mesh = SubResource("BoxMesh_rjqdx")
 
 [node name="Player" parent="." unique_id=637285054 instance=ExtResource("1_hsw67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5737287, 0)
-move_speed = 6.0
-accel = 30.0
-friction = 40.0
-fire_rate = 6.0
-bullet_speed = 14.0
 
 [node name="AudioShoot" type="AudioStreamPlayer" parent="Player" unique_id=217064507]
 stream = ExtResource("2_cx4eu")
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="Player" unique_id=1061697111]
 stream = ExtResource("2_3q0a4")
+
+[node name="Node3D" type="Node3D" parent="Player" unique_id=1672264274]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=166280860 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 5, 0.85033894)
@@ -67,23 +65,53 @@ script = ExtResource("4_vw57g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EnemySpawner" unique_id=466207177]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2138921635]
-layer = 10
+[node name="CanvasLayer1" type="CanvasLayer" parent="." unique_id=2138921635]
 
-[node name="Minimap" type="Control" parent="CanvasLayer" unique_id=1832924539]
+[node name="Minimap" type="Control" parent="CanvasLayer1" unique_id=1832924539]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 20.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -620.0
 offset_top = 20.0
-offset_right = 116.0
-offset_bottom = 116.0
+offset_right = -520.0
+offset_bottom = 120.0
 grow_horizontal = 0
-grow_vertical = 0
 script = ExtResource("5_minimap")
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer1" unique_id=402673121]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -240.0
+offset_right = 440.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over
+"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer1" unique_id=425798196]
+texture_filter = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 25.0
+offset_right = -8.0
+offset_bottom = 52.0
+grow_horizontal = 0
+max_value = 6.0
+value = 6.0
+show_percentage = false
+script = ExtResource("8_4harg")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=969918665]
 stream = ExtResource("8_fup5m")
 pitch_scale = 0.6
 autoplay = true
 
-[connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/Minimap" method="_on_camera_3d_player_room_changed"]
+[connection signal="player_room_changed" from="Camera3D" to="CanvasLayer1/Minimap" method="_on_camera_3d_player_room_changed"]

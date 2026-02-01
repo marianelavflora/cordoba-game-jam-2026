@@ -17,24 +17,53 @@ const BULLET_SCENE: PackedScene = preload("res://src/characters/player/bullet.ts
 var _cooldown: float = 0.0
 var _aim_dir: Vector3 = Vector3(0, 0, 1) # fallback
 
+
+@onready var health_bar := get_tree().current_scene.get_node("CanvasLayer1/HealthBar")
+
+
+
 @export var max_hp: int = 6
 var hp: int = 6
-
+var is_dead: bool = false
 func _ready() -> void:
 	hp = max_hp
 	add_to_group("player")
+	if health_bar:
+		health_bar.update_health(hp, max_hp)
+
+
 
 func take_damage(amount: int) -> void:
 	hp = max(hp - amount, 0)
+	
 	if audio_hit:
 		audio_hit.play() # no stop → mejor sensación de impacto
 	print("Player HP:", hp)
+	if health_bar:
+		health_bar.update_health(hp, max_hp)
+	if hp <= 0:
+		die()
+
+func die() -> void:
+	is_dead = true
+	velocity = Vector3.ZERO
+	set_physics_process(false) 
+	set_process(false)         
+
+	# Mostrar cartel
+	var ui := get_tree().current_scene.get_node("CanvasLayer1/GameOverLabel")
+	if ui:
+		ui.visible = true
+		
 
 
 
 	
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	# ---- MOVIMIENTO (WASD) ----
+	
 	var move_input: Vector2 = Input.get_vector(
 		&"move_left", &"move_right",
 		&"move_forward", &"move_backward"
