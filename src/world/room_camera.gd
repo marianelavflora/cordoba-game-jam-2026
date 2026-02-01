@@ -14,7 +14,7 @@ var current_room: Vector2i = Vector2i.ZERO :
 		current_room = value
 		var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
 		tween.tween_property(
-			self, "global_position", 
+			self, "global_position",
 			Vector3(
 				current_room.x * RoomPlacer.ROOM_SIZE.x,
 				HEIGHT,
@@ -28,8 +28,8 @@ var current_room: Vector2i = Vector2i.ZERO :
 func _process(delta: float) -> void:
 	if is_instance_valid(player):
 		current_room = _get_current_room(player.global_position)
-	
-	
+
+
 func _get_current_room(from_position: Vector3) -> Vector2i:
 	var position_2d := Vector2(from_position.x, from_position.z)
 	var room_size := RoomPlacer.get_room_size_2d()

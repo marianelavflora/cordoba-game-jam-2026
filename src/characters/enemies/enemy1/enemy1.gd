@@ -13,7 +13,7 @@ var step_timer := 0.0
 @export var step_interval_run := 0.35
 
 @export var walk_speed: float = 2.0
-@export var run_speed: float = 4.5
+@export var run_speed: float = 4.0
 @export var state_time: float = 3.0
 @export var max_health: int = 7
 
@@ -36,7 +36,7 @@ func _ready():
 	health = max_health
 	mesh_dead.visible = false
 	player = get_tree().get_first_node_in_group("player")
-	
+
 	step_audio = AudioStreamPlayer3D.new()
 	step_audio.stream = step_stream
 	step_audio.bus = "SFX"
@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	# MOVIMIENTO
 	velocity = direction * speed
 	move_and_slide()
-	
+
 
 	# ---- DAÑO POR CONTACTO ----
 	if damage_cooldown <= 0.0:

@@ -23,11 +23,12 @@ static func get_room_cell(world_pos: Vector3) -> Vector2i:
 func _on_layout_generator_layout_generated(grid: Dictionary[Vector2i, RoomData]) -> void:
 	for child in get_children():
 		child.queue_free()
-		
+
 	for cell in grid.keys():
 		var room_data: RoomData = grid.get(cell)
 		var scene: PackedScene = room_data.scene
 		var room: Node3D = scene.instantiate()
+		room.cell = cell
 		room.position = Vector3(cell.x, 0, cell.y) * ROOM_SIZE
 		add_child(room)
 		var exits: Array[Vector2i]

@@ -1,29 +1,26 @@
 [gd_scene format=3 uid="uid://b5dk77lavbqeg"]
 
 [ext_resource type="Script" uid="uid://svjnuo3jweyr" path="res://src/world/rooms/room.gd" id="1_7avf4"]
-[ext_resource type="Texture2D" uid="uid://ledyb4ig0ga2" path="res://Texturas/9548.jpg" id="2_wasvu"]
 [ext_resource type="Texture2D" uid="uid://h7w2wrd8askr" path="res://Texturas/whiteFloor.png" id="3_f5q8f"]
-[ext_resource type="Texture2D" path="res://Texturas/wall_green.jpg" id="4_walls"]
-[ext_resource type="PackedScene" uid="uid://nuwtpmjln7tl" path="res://src/characters/enemies/enemy1/enemy1.tscn" id="3_lrux5"]
+[ext_resource type="Texture2D" uid="uid://4h87tipyngse" path="res://Texturas/wall_green.jpg" id="4_walls"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
-albedo_texture = ExtResource("3_f5q8f")
 albedo_color = Color(0.9098, 0.8745, 0.8235, 1)
-uv1_scale = Vector3(1.0, 1.0, 1.0)
-uv1_triplanar = false
+albedo_texture = ExtResource("3_f5q8f")
 roughness = 0.9
-metallic = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_walls"]
-albedo_texture = ExtResource("4_walls")
 albedo_color = Color(0.3176, 0.4667, 0.4941, 1)
+albedo_texture = ExtResource("4_walls")
 roughness = 0.85
-metallic = 0.0
 rim_enabled = true
 rim = 0.12
 rim_tint = 0.04
-uv1_scale = Vector3(2.0, 2.0, 2.0)
+uv1_scale = Vector3(2, 2, 2)
 uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5q8f"]
+size = Vector3(12.930664, 1.8505859, 9.26001)
 
 [node name="Room" type="Node3D" unique_id=1368666116]
 script = ExtResource("1_7avf4")
@@ -79,5 +76,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
 
-[node name="Enemy1" parent="." unique_id=405373915 instance=ExtResource("3_lrux5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5265217, 0, 0)
+[node name="Area3D" type="Area3D" parent="." unique_id=1492943409]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=214773483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42529297, 0)
+shape = SubResource("BoxShape3D_f5q8f")
+
+[node name="EnemiesPos" type="Node3D" parent="." unique_id=1908170400]
+
+[node name="Marker3D" type="Marker3D" parent="EnemiesPos" unique_id=1803495617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5008991)
+
+[node name="Marker3D2" type="Marker3D" parent="EnemiesPos" unique_id=1544300491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5818229)
+
+[node name="Marker3D3" type="Marker3D" parent="EnemiesPos" unique_id=843013673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.917697, 0, 1.5818229)
+
+[node name="Marker3D4" type="Marker3D" parent="EnemiesPos" unique_id=1203902767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.917697, 0, -1.917278)
+
+[node name="Marker3D5" type="Marker3D" parent="EnemiesPos" unique_id=2081603883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9001813, 0, -1.917278)
+
+[node name="Marker3D6" type="Marker3D" parent="EnemiesPos" unique_id=1109879911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9001813, 0, 3.0249398)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered" flags=6]

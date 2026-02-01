@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 @export var move_speed: float = 6.0
@@ -34,6 +35,9 @@ func _ready() -> void:
 
 
 func take_damage(amount: int) -> void:
+	if hp <= 0:
+		return
+
 	hp = max(hp - amount, 0)
 	
 	if audio_hit:
@@ -56,9 +60,12 @@ func die() -> void:
 		ui.visible = true
 		
 
+	if hp <= 0:
+		die()
 
 
-	
+
+
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
@@ -154,3 +161,20 @@ func _rotate_towards_aim(delta: float) -> void:
 		target_angle,
 		rotation_speed * delta
 	)
+
+func die() -> void:
+	print("Player died")
+
+	# Opcional: detener movimiento y disparo
+	set_physics_process(false)
+
+	# Opcional: desactivar colisión
+	if has_node("CollisionShape3D"):
+		$CollisionShape3D.disabled = true
+
+	# Opcional: ocultar el modelo
+	if has_node("MeshInstance3D"):
+		$MeshInstance3D.visible = false
+
+	# Si querés destruirlo directamente:
+	queue_free()

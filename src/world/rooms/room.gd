@@ -3,6 +3,10 @@ extends Node3D
 const WALL_TEXTURE_WAINSCOTING := "res://Texturas/wall_wainscoting.png"
 const WALL_TEXTURE_WHITE := "res://Texturas/wall_mall.png"
 const WALL_TEXTURE_BRICK := "res://Texturas/wall_brick.png"
+const MIN_ENEMIES := 1
+const MAX_ENEMIES := 3
+const ENEMY_1 = preload("uid://nuwtpmjln7tl")  # Enemy1
+const ENEMY_2 = preload("uid://tldtdmn6ra7f")  # Enemy2 (Granny)
 
 @onready var walls: Dictionary[Vector2i, CSGBox3D] = {
 	Vector2i.LEFT: $Walls/WallLeft,
@@ -15,6 +19,9 @@ const WALL_TEXTURE_BRICK := "res://Texturas/wall_brick.png"
 @onready var wall_right: CSGBox3D = $Walls/WallRight
 @onready var wall_bottom: CSGBox3D = $Walls/WallBottom
 @onready var wall_top: CSGBox3D = $Walls/WallTop
+@onready var enemies_pos: Node3D = $EnemiesPos
+
+var cell: Vector2i = Vector2i.ZERO
 
 
 func _ready() -> void:
@@ -43,14 +50,36 @@ func _apply_random_wall_texture() -> void:
 
 func initialize(exits: Array[Vector2i]) -> void:
 	for wall_dir in walls.keys():
-		if wall_dir in exits: 
+		if wall_dir in exits:
 			continue
 		match wall_dir:
-			Vector2i.LEFT: 
+			Vector2i.LEFT:
 				$Walls/WallLeft/DoorHole.queue_free()
-			Vector2i.RIGHT: 
+			Vector2i.RIGHT:
 				$Walls/WallRight/DoorHole.queue_free()
-			Vector2i.DOWN: 
+			Vector2i.DOWN:
 				$Walls/WallBottom/DoorHole.queue_free()
-			Vector2i.UP: 
+			Vector2i.UP:
 				$Walls/WallTop/DoorHole.queue_free()
+
+
+func _spawn_enemies() -> void:
+	var amount: int = randi_range(MIN_ENEMIES, MAX_ENEMIES)
+	var positions := enemies_pos.get_children()
+	positions.shuffle()
+	positions.resize(amount)
+	
+	# Array con ambos tipos de enemigos
+	var enemy_types := [ENEMY_1, ENEMY_2]
+	
+	for pos in positions:
+		# Elegir tipo de enemigo aleatoriamente
+		var enemy_scene: PackedScene = enemy_types.pick_random()
+		var enemy: CharacterBody3D = enemy_scene.instantiate()
+		enemy.position = pos.position
+		add_child(enemy)
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is Player and cell != Vector2i.ZERO:
+		_spawn_enemies()
