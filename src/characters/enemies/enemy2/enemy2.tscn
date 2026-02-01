@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://tldtdmn6ra7f"]
+
+[ext_resource type="ArrayMesh" uid="uid://13k4g0fqfhsp" path="res://assets/objs/ViejaMascara001.obj" id="1_1ofda"]
+[ext_resource type="Script" uid="uid://b363bx5ipqrg" path="res://src/characters/enemies/enemy2/enemy2.gd" id="1_kd3is"]
+[ext_resource type="ArrayMesh" uid="uid://ds4g8e40ye8ii" path="res://assets/fbxs/Vieja001.obj" id="2_kd3is"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d6w71"]
+
+[node name="Enemy2" type="CharacterBody3D" unique_id=314546949]
+script = ExtResource("1_kd3is")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1065687178]
+transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, 0.6525161, 0)
+shape = SubResource("CapsuleShape3D_d6w71")
+
+[node name="MeshAlive" type="MeshInstance3D" parent="." unique_id=589940953]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.9220818, 0)
+mesh = ExtResource("1_1ofda")
+
+[node name="MeshDead" type="MeshInstance3D" parent="." unique_id=993349048]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.9, 0)
+visible = false
+mesh = ExtResource("2_kd3is")
