@@ -49,21 +49,6 @@ func take_damage(amount: int) -> void:
 	if hp <= 0:
 		die()
 
-func die() -> void:
-	is_dead = true
-	velocity = Vector3.ZERO
-	set_physics_process(false) 
-	set_process(false)         
-
-	# Mostrar cartel
-	var ui := get_tree().current_scene.get_node("CanvasLayer1/GameOverLabel")
-	if ui:
-		ui.visible = true
-		
-
-	if hp <= 0:
-		die()
-
 
 
 
