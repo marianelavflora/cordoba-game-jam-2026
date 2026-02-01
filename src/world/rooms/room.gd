@@ -43,14 +43,14 @@ func _apply_random_wall_texture() -> void:
 
 func initialize(exits: Array[Vector2i]) -> void:
 	for wall_dir in walls.keys():
-		if wall_dir in exits: 
+		if wall_dir in exits:
 			continue
 		match wall_dir:
-			Vector2i.LEFT: 
+			Vector2i.LEFT:
 				$Walls/WallLeft/DoorHole.queue_free()
-			Vector2i.RIGHT: 
+			Vector2i.RIGHT:
 				$Walls/WallRight/DoorHole.queue_free()
-			Vector2i.DOWN: 
+			Vector2i.DOWN:
 				$Walls/WallBottom/DoorHole.queue_free()
-			Vector2i.UP: 
+			Vector2i.UP:
 				$Walls/WallTop/DoorHole.queue_free()

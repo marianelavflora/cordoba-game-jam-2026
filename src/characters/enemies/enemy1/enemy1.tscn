@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://nuwtpmjln7tl"]
 
-[ext_resource type="ArrayMesh" uid="uid://c2q20pj3723nm" path="res://assets/objs/NPC001.obj" id="1_260jx"]
 [ext_resource type="Script" uid="uid://twaus085oeic" path="res://src/characters/enemies/enemy1/enemy1.gd" id="1_of3qg"]
 [ext_resource type="AudioStream" uid="uid://liob64djnrt3" path="res://assets/sfx/pasos del boss.wav" id="2_5okft"]
 [ext_resource type="AudioStream" uid="uid://dvcwmsw2ix5cq" path="res://assets/sfx/hitnpc.wav" id="3_e12x0"]
 [ext_resource type="ArrayMesh" uid="uid://13k4g0fqfhsp" path="res://assets/objs/ViejaMascara001.obj" id="3_of3qg"]
 [ext_resource type="AudioStream" uid="uid://cpaihlk6ujnfr" path="res://assets/sfx/Boss Dies.wav" id="4_1n826"]
+[ext_resource type="ArrayMesh" uid="uid://b57tkieb78e64" path="res://assets/objs/Vieja001.obj" id="5_5okft"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qb34h"]
 
@@ -20,9 +20,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90416193, 0)
 shape = SubResource("CapsuleShape3D_qb34h")
 
 [node name="MeshAlive" type="MeshInstance3D" parent="." unique_id=1159972751]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.0534692, 0)
-mesh = ExtResource("1_260jx")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.773819, 0)
+mesh = ExtResource("5_5okft")
 
 [node name="MeshDead" type="MeshInstance3D" parent="." unique_id=1008835526]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.774, 0)
 visible = false
 mesh = ExtResource("3_of3qg")
