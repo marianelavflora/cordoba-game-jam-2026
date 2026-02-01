@@ -68,15 +68,15 @@ script = ExtResource("4_vw57g")
 [node name="CanvasLayer1" type="CanvasLayer" parent="." unique_id=2138921635]
 
 [node name="Minimap" type="Control" parent="CanvasLayer1" unique_id=1832924539]
+clip_contents = true
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -620.0
+anchors_preset = 0
+offset_left = 20.0
 offset_top = 20.0
-offset_right = -520.0
-offset_bottom = 120.0
+offset_right = 116.0
+offset_bottom = 116.0
 grow_horizontal = 0
+grow_vertical = 0
 script = ExtResource("5_minimap")
 
 [node name="GameOverLabel" type="Label" parent="CanvasLayer1" unique_id=402673121]
@@ -114,4 +114,5 @@ stream = ExtResource("8_fup5m")
 pitch_scale = 0.6
 autoplay = true
 
+[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer1/Minimap" method="_on_layout_generator_layout_generated"]
 [connection signal="player_room_changed" from="Camera3D" to="CanvasLayer1/Minimap" method="_on_camera_3d_player_room_changed"]
