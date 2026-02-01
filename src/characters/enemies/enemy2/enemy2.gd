@@ -18,8 +18,8 @@ extends CharacterBody3D
 
 # ---- DISPARO DE BALAS ----
 @export var bullet_scene: PackedScene         # arrastrar GrannyBullet.tscn
-@export var min_shoot_interval: float = 0.7
-@export var max_shoot_interval: float = 2.0
+@export var min_shoot_interval: float = 0.4
+@export var max_shoot_interval: float = 1.4
 
 # ---------------- VARIABLES INTERNAS ----------------
 var clockwise: bool = true
