@@ -1,13 +1,9 @@
-[gd_scene format=3 uid="uid://nw1v7rw2dkdw"]
+[gd_scene load_steps=2 format=3 uid="uid://nw1v7rw2dkdw"]
 
 [ext_resource type="PackedScene" uid="uid://b5dk77lavbqeg" path="res://src/world/rooms/room.tscn" id="1_t3t8p"]
+[ext_resource type="Script" path="res://src/world/rooms/room_2_gondolas.gd" id="2_gondolas"]
 
 [node name="Room" unique_id=1368666116 instance=ExtResource("1_t3t8p")]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Floor" parent_id_path=PackedInt32Array(1360159522) index="0" unique_id=90308566]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9884124, 0.5373535, 1.8641739)
-height = 3.074707
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Floor" parent_id_path=PackedInt32Array(1360159522) index="1" unique_id=841295538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.523512, 0.5373535, -2.0329194)
-height = 3.074707
+[node name="Gondolas" type="Node3D" parent="." index="2"]
+script = ExtResource("2_gondolas")
