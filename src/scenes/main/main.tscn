@@ -1,5 +1,6 @@
-[gd_scene format=3 uid="uid://bft3bspicyvel"]
+[gd_scene load_steps=12 format=3 uid="uid://bft3bspicyvel"]
 
+[ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_main_script"]
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
 [ext_resource type="AudioStream" uid="uid://ckg5o3hwgqc0n" path="res://assets/sfx/Child Get Hitted 2.wav" id="2_3q0a4"]
 [ext_resource type="AudioStream" uid="uid://dvcwmsw2ix5cq" path="res://assets/sfx/hitnpc.wav" id="2_cx4eu"]
@@ -27,6 +28,7 @@ glow_enabled = true
 size = Vector3(50, 0, 50)
 
 [node name="Main" type="Node3D" unique_id=1341778376]
+script = ExtResource("1_main_script")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=361748045]
 environment = SubResource("Environment_45uaa")
@@ -111,8 +113,9 @@ script = ExtResource("8_4harg")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=969918665]
 stream = ExtResource("8_fup5m")
+volume_db = -5.0
 pitch_scale = 0.6
-autoplay = true
+autoplay = false
 
 [connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer1/Minimap" method="_on_layout_generator_layout_generated"]
 [connection signal="player_room_changed" from="Camera3D" to="CanvasLayer1/Minimap" method="_on_camera_3d_player_room_changed"]
