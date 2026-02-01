@@ -4,9 +4,10 @@
 [ext_resource type="AudioStream" uid="uid://ckg5o3hwgqc0n" path="res://assets/sfx/Child Get Hitted 2.wav" id="2_3q0a4"]
 [ext_resource type="AudioStream" uid="uid://dvcwmsw2ix5cq" path="res://assets/sfx/hitnpc.wav" id="2_cx4eu"]
 [ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
-[ext_resource type="PackedScene" uid="uid://bw3qfmuakh766" path="res://src/world/world_generator.tscn" id="4_fub2y"]
 [ext_resource type="Script" uid="uid://3e1m1iqijjjo" path="res://src/characters/enemies/enemy_spawner.gd" id="4_vw57g"]
+[ext_resource type="Script" uid="uid://bje5pf8i68lyw" path="res://src/world/layout_generator.gd" id="5_4harg"]
 [ext_resource type="Script" uid="uid://bgtdt1ak2dv2q" path="res://src/world/minimap.gd" id="5_minimap"]
+[ext_resource type="Script" uid="uid://bh7msqcaafqvv" path="res://src/world/room_placer.gd" id="6_45wc1"]
 [ext_resource type="AudioStream" uid="uid://7w3i28pa0ejs" path="res://assets/music/trackardo.mp3" id="8_fup5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsw67"]
@@ -60,7 +61,13 @@ size = 10.0
 script = ExtResource("3_vw57g")
 player = NodePath("../Player")
 
-[node name="WorldGenerator" parent="." unique_id=551505807 instance=ExtResource("4_fub2y")]
+[node name="WorldGenerator" type="Node3D" parent="." unique_id=551505807]
+
+[node name="LayoutGenerator" type="Node" parent="WorldGenerator" unique_id=551301900]
+script = ExtResource("5_4harg")
+
+[node name="RoomPlacer" type="Node3D" parent="WorldGenerator" unique_id=561831425]
+script = ExtResource("6_45wc1")
 
 [node name="EnemySpawner" type="Node3D" parent="." unique_id=1247833858]
 script = ExtResource("4_vw57g")
@@ -70,15 +77,21 @@ script = ExtResource("4_vw57g")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2138921635]
 layer = 10
 
-[node name="Minimap" type="Control" parent="CanvasLayer" unique_id=1832924539]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 116.0
-offset_bottom = 116.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1950562126]
+clip_contents = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 72.0
+offset_bottom = 72.0
+color = Color(0.16796875, 0.16796875, 0.16796875, 1)
+
+[node name="Minimap" type="Control" parent="CanvasLayer/ColorRect" unique_id=1832924539]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_minimap")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=969918665]
@@ -86,4 +99,6 @@ stream = ExtResource("8_fup5m")
 pitch_scale = 0.6
 autoplay = true
 
-[connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/Minimap" method="_on_camera_3d_player_room_changed"]
+[connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/ColorRect/Minimap" method="_on_camera_3d_player_room_changed"]
+[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="WorldGenerator/RoomPlacer" method="_on_layout_generator_layout_generated"]
+[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer/ColorRect/Minimap" method="_on_layout_generator_layout_generated"]

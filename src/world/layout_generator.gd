@@ -29,20 +29,20 @@ var grid: Dictionary[Vector2i, RoomData] = {}
 ## Se mueve en direcciones aleatorias para generar la
 ## grilla.
 class Walker:
-	var dir: Vector2i 
-	var pos: Vector2i 
+	var dir: Vector2i
+	var pos: Vector2i
 
 
 
 func _ready() -> void:
 	generate_grid()
-	
-	
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"ui_accept"):
 		generate_grid()
-	
-	
+
+
 func generate_grid() -> void:
 	grid.clear()
 	var starting_position: Vector2i = Vector2i.ZERO
@@ -82,11 +82,11 @@ func generate_grid() -> void:
 				break
 
 		iterations += 1
-	
+
 	for cell in walked_cells:
 		grid.set(cell, ROOM_WEIGHTS.keys()[rng.rand_weighted(ROOM_WEIGHTS.values())])
 	layout_generated.emit(grid)
-	
+
 
 func _add_walker(pos: Vector2i, array: Array[Walker]) -> void:
 	var walker: Walker = Walker.new()
