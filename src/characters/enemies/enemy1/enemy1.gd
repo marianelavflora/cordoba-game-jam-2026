@@ -1,4 +1,16 @@
 extends CharacterBody3D
+# ---- AUDIO ----
+@export var step_stream: AudioStream
+@export var hurt_stream: AudioStream
+@export var death_stream: AudioStream
+
+var step_audio: AudioStreamPlayer3D
+var hurt_audio: AudioStreamPlayer3D
+var death_audio: AudioStreamPlayer3D
+
+var step_timer := 0.0
+@export var step_interval_walk := 0.6
+@export var step_interval_run := 0.35
 
 @export var walk_speed: float = 2.0
 @export var run_speed: float = 4.5
@@ -24,6 +36,25 @@ func _ready():
 	health = max_health
 	mesh_dead.visible = false
 	player = get_tree().get_first_node_in_group("player")
+	
+	step_audio = AudioStreamPlayer3D.new()
+	step_audio.stream = step_stream
+	step_audio.bus = "SFX"
+	step_audio.unit_size = 6.0
+	step_audio.autoplay = false
+	add_child(step_audio)
+
+	hurt_audio = AudioStreamPlayer3D.new()
+	hurt_audio.stream = hurt_stream
+	hurt_audio.bus = "SFX"
+	hurt_audio.unit_size = 6.0
+	add_child(hurt_audio)
+
+	death_audio = AudioStreamPlayer3D.new()
+	death_audio.stream = death_stream
+	death_audio.bus = "SFX"
+	death_audio.unit_size = 8.0
+	add_child(death_audio)
 
 func _physics_process(delta: float) -> void:
 	if health <= 0 or player == null:
@@ -54,6 +85,7 @@ func _physics_process(delta: float) -> void:
 	# MOVIMIENTO
 	velocity = direction * speed
 	move_and_slide()
+	
 
 	# ---- DAÑO POR CONTACTO ----
 	if damage_cooldown <= 0.0:
@@ -64,11 +96,16 @@ func _physics_process(delta: float) -> void:
 				body.take_damage(contact_damage)
 				damage_cooldown = damage_interval
 				break
-
+	if velocity.length() > 0.1 and step_stream:
+		step_timer -= delta
+	if step_timer <= 0.0:
+		step_audio.play()
+		step_timer = step_interval_run if is_running else step_interval_walk
 func take_damage(amount: int) -> void:
 	if health <= 0:
 		return
-
+	if hurt_stream:
+		hurt_audio.play()
 	health -= amount
 	if health <= 0:
 		die()
@@ -77,6 +114,7 @@ func die() -> void:
 	mesh_alive.visible = false
 	mesh_dead.visible = true
 	collision.disabled = true
-
+	if death_stream:
+		death_audio.play()
 	await get_tree().create_timer(2.0).timeout
 	queue_free()

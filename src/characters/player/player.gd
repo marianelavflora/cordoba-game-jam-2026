@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var audio_hit: AudioStreamPlayer = $AudioHit
 const BULLET_SCENE: PackedScene = preload("res://src/characters/player/bullet.tscn")
 
+@export var rotation_speed: float = 10.0
+
 var _cooldown: float = 0.0
 var _aim_dir: Vector3 = Vector3(0, 0, 1) # fallback
 
@@ -37,7 +39,6 @@ func _physics_process(delta: float) -> void:
 		&"move_left", &"move_right",
 		&"move_forward", &"move_backward"
 	)
-
 	var move_dir := Vector3(move_input.x, 0.0, move_input.y)
 	var desired_velocity := Vector3.ZERO
 
@@ -59,6 +60,7 @@ func _physics_process(delta: float) -> void:
 	if mouse_aim != Vector3.ZERO:
 		_aim_dir = mouse_aim
 
+	_rotate_towards_aim(delta)
 	# ---- DISPARO (Left Click via action "shoot") ----
 	_cooldown = maxf(_cooldown - delta, 0.0)
 
@@ -110,3 +112,16 @@ func _try_shoot() -> void:
 	bullet.shooter = self
 
 	_cooldown = 1.0 / fire_rate
+
+func _rotate_towards_aim(delta: float) -> void:
+	if _aim_dir == Vector3.ZERO:
+		return
+
+	var target_angle := atan2(_aim_dir.x, _aim_dir.z)
+	var current_angle := rotation.y
+
+	rotation.y = lerp_angle(
+		current_angle,
+		target_angle,
+		rotation_speed * delta
+	)

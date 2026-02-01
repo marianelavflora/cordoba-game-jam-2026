@@ -2,12 +2,18 @@
 
 [ext_resource type="ArrayMesh" uid="uid://c2q20pj3723nm" path="res://assets/objs/NPC001.obj" id="1_260jx"]
 [ext_resource type="Script" uid="uid://twaus085oeic" path="res://src/characters/enemies/enemy1/enemy1.gd" id="1_of3qg"]
+[ext_resource type="AudioStream" uid="uid://liob64djnrt3" path="res://assets/sfx/pasos del boss.wav" id="2_5okft"]
+[ext_resource type="AudioStream" uid="uid://dvcwmsw2ix5cq" path="res://assets/sfx/hitnpc.wav" id="3_e12x0"]
 [ext_resource type="ArrayMesh" uid="uid://13k4g0fqfhsp" path="res://assets/objs/ViejaMascara001.obj" id="3_of3qg"]
+[ext_resource type="AudioStream" uid="uid://cpaihlk6ujnfr" path="res://assets/sfx/Boss Dies.wav" id="4_1n826"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qb34h"]
 
 [node name="Enemy1" type="CharacterBody3D" unique_id=405373915]
 script = ExtResource("1_of3qg")
+step_stream = ExtResource("2_5okft")
+hurt_stream = ExtResource("3_e12x0")
+death_stream = ExtResource("4_1n826")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=337642674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90416193, 0)
