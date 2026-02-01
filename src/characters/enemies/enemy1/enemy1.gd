@@ -24,6 +24,7 @@ func _ready():
 	health = max_health
 	mesh_dead.visible = false
 	player = get_tree().get_first_node_in_group("player")
+	add_to_group("enemies")
 
 func _physics_process(delta: float) -> void:
 	if health <= 0 or player == null:
@@ -74,6 +75,9 @@ func take_damage(amount: int) -> void:
 		die()
 
 func die() -> void:
+	# Removerse del grupo inmediatamente para que los door blockers lo detecten
+	remove_from_group("enemies")
+	
 	mesh_alive.visible = false
 	mesh_dead.visible = true
 	collision.disabled = true

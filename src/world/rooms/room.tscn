@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://h7w2wrd8askr" path="res://Texturas/whiteFloor.png" id="3_f5q8f"]
 [ext_resource type="Texture2D" path="res://Texturas/wall_green.jpg" id="4_walls"]
 [ext_resource type="PackedScene" uid="uid://nuwtpmjln7tl" path="res://src/characters/enemies/enemy1/enemy1.tscn" id="3_lrux5"]
+[ext_resource type="Script" path="res://src/world/rooms/door_blocker.gd" id="6_blocker"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
 albedo_texture = ExtResource("3_f5q8f")
@@ -46,6 +47,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
 
+[node name="DoorBlocker" type="Node3D" parent="Walls/WallLeft/DoorHole"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+script = ExtResource("6_blocker")
+
 [node name="WallRight" type="CSGBox3D" parent="Walls" unique_id=2113532230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.609336, 0.9125366, 0)
 material_override = SubResource("StandardMaterial3D_walls")
@@ -56,6 +61,10 @@ size = Vector3(0.2, 1.825, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
+
+[node name="DoorBlocker" type="Node3D" parent="Walls/WallRight/DoorHole"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 0)
+script = ExtResource("6_blocker")
 
 [node name="WallBottom" type="CSGBox3D" parent="Walls" unique_id=359396392]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.033164486, 0.9125366, 4.8358307)
@@ -68,6 +77,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
 
+[node name="DoorBlocker" type="Node3D" parent="Walls/WallBottom/DoorHole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("6_blocker")
+
 [node name="WallTop" type="CSGBox3D" parent="Walls" unique_id=260152024]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.022361295, 0.9125366, -4.9153976)
 material_override = SubResource("StandardMaterial3D_walls")
@@ -78,6 +91,10 @@ size = Vector3(0.2, 1.825, 13.379)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
+
+[node name="DoorBlocker" type="Node3D" parent="Walls/WallTop/DoorHole"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, 0)
+script = ExtResource("6_blocker")
 
 [node name="Enemy1" parent="." unique_id=405373915 instance=ExtResource("3_lrux5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5265217, 0, 0)

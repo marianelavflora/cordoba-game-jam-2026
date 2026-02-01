@@ -17,6 +17,7 @@ var _fire_cd: float = 0.0
 func _ready() -> void:
 	_center = global_position
 	_fire_cd = randf_range(0.1, fire_interval)
+	add_to_group("enemies")
 
 func _physics_process(delta: float) -> void:
 	# 1) Patrulla en círculo (independiente de colliders)

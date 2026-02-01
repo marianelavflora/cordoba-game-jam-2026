@@ -14,7 +14,7 @@ func _on_layout_generator_layout_generated(grid: Dictionary[Vector2i, RoomData])
 	
 func _draw() -> void:
 	# Background so minimap is visible over the 3D scene
-	draw_rect(Rect2(Vector2.ZERO, size), Color(0.75, 0.75, 0.75, 0.9))
+	draw_rect(Rect2(Vector2.ZERO, size), Color(0.1, 0.1, 0.15, 0.85))
 	if layout.is_empty():
 		return
 	for cell in layout:
