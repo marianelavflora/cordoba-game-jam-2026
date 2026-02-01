@@ -75,4 +75,5 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("5_minimap")
 
+[connection signal="layout_generated" from="WorldGenerator/LayoutGenerator" to="CanvasLayer/Minimap" method="_on_layout_generator_layout_generated"]
 [connection signal="player_room_changed" from="Camera3D" to="CanvasLayer/Minimap" method="_on_camera_3d_player_room_changed"]
