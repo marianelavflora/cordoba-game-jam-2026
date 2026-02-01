@@ -29,6 +29,12 @@ func _physics_process(delta: float) -> void:
 	if health <= 0 or player == null:
 		return
 
+	# Solo perseguir si el jugador está en la misma habitación
+	if RoomPlacer.get_room_cell(player.global_position) != RoomPlacer.get_room_cell(global_position):
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+
 	# cooldown del daño
 	damage_cooldown = maxf(damage_cooldown - delta, 0.0)
 
@@ -49,18 +55,15 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	move_and_slide()
 
-	# ---- DAÑO POR CONTACTO USANDO COLLISIONS ----
-	if damage_cooldown > 0.0:
-		return
-
-	for i in range(get_slide_collision_count()):
-		var collision_info := get_slide_collision(i)
-		var body := collision_info.get_collider()
-
-		if body != null and body.is_in_group("player"):
-			body.take_damage(contact_damage)
-			damage_cooldown = damage_interval
-			break
+	# ---- DAÑO POR CONTACTO ----
+	if damage_cooldown <= 0.0:
+		for i in range(get_slide_collision_count()):
+			var collision_info := get_slide_collision(i)
+			var body := collision_info.get_collider()
+			if body != null and body.is_in_group("player"):
+				body.take_damage(contact_damage)
+				damage_cooldown = damage_interval
+				break
 
 func take_damage(amount: int) -> void:
 	if health <= 0:

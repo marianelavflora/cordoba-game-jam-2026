@@ -24,9 +24,11 @@ func _physics_process(delta: float) -> void:
 	var offset := Vector3(cos(_angle), 0.0, sin(_angle)) * patrol_radius
 	global_position = _center + offset
 
-	# 2) Buscar player
+	# 2) Buscar player (solo actuar si está en la misma habitación)
 	var player := get_tree().get_first_node_in_group("player") as Node3D
 	if player == null:
+		return
+	if RoomPlacer.get_room_cell(player.global_position) != RoomPlacer.get_room_cell(global_position):
 		return
 
 	# 3) Apuntar y disparar

@@ -13,6 +13,13 @@ static func get_room_size_2d() -> Vector2:
 	return Vector2(ROOM_SIZE.x, ROOM_SIZE.z)
 
 
+static func get_room_cell(world_pos: Vector3) -> Vector2i:
+	var room_size: Vector2 = get_room_size_2d()
+	var position_2d := Vector2(world_pos.x, world_pos.z)
+	var offset_position := position_2d + room_size / 2.0
+	return Vector2i((offset_position / room_size).floor())
+
+
 func _on_layout_generator_layout_generated(grid: Dictionary[Vector2i, RoomData]) -> void:
 	for child in get_children():
 		child.queue_free()

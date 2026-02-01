@@ -64,6 +64,7 @@ script = ExtResource("4_vw57g")
 layer = 10
 
 [node name="Minimap" type="Control" parent="CanvasLayer" unique_id=539880922]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
