@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bed7buvicymhv" path="res://src/characters/player/player.tscn" id="1_hsw67"]
 [ext_resource type="AudioStream" uid="uid://ckg5o3hwgqc0n" path="res://assets/sfx/Child Get Hitted 2.wav" id="2_3q0a4"]
 [ext_resource type="AudioStream" uid="uid://dvcwmsw2ix5cq" path="res://assets/sfx/hitnpc.wav" id="2_cx4eu"]
+[ext_resource type="AudioStream" uid="uid://ba430as275hy8" path="res://assets/sfx/woosh.wav" id="3_45wc1"]
 [ext_resource type="Script" uid="uid://bsgqt3rgtvnw1" path="res://src/world/room_camera.gd" id="3_vw57g"]
 [ext_resource type="Script" uid="uid://3e1m1iqijjjo" path="res://src/characters/enemies/enemy_spawner.gd" id="4_vw57g"]
 [ext_resource type="Script" uid="uid://bje5pf8i68lyw" path="res://src/world/layout_generator.gd" id="5_4harg"]
@@ -26,6 +27,28 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_rjqdx"]
 size = Vector3(50, 0, 50)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f4xxn"]
+random_pitch = 2.244924
+streams_count = 1
+stream_0/stream = ExtResource("2_cx4eu")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cic45"]
+random_pitch = 2.244924
+streams_count = 1
+stream_0/stream = ExtResource("3_45wc1")
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_ek26i"]
+stream_count = 2
+stream_0/stream = SubResource("AudioStreamRandomizer_f4xxn")
+stream_0/volume = 0.0
+stream_1/stream = SubResource("AudioStreamRandomizer_cic45")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_45wc1"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("2_3q0a4")
+
 [node name="Main" type="Node3D" unique_id=1341778376]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=361748045]
@@ -42,17 +65,12 @@ mesh = SubResource("BoxMesh_rjqdx")
 
 [node name="Player" parent="." unique_id=637285054 instance=ExtResource("1_hsw67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5737287, 0)
-move_speed = 6.0
-accel = 30.0
-friction = 40.0
-fire_rate = 6.0
-bullet_speed = 14.0
 
 [node name="AudioShoot" type="AudioStreamPlayer" parent="Player" unique_id=217064507]
-stream = ExtResource("2_cx4eu")
+stream = SubResource("AudioStreamSynchronized_ek26i")
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="Player" unique_id=1061697111]
-stream = ExtResource("2_3q0a4")
+stream = SubResource("AudioStreamRandomizer_45wc1")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=166280860 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 5, 0.85033894)
