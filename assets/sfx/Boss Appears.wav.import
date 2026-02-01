@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://10010ggidg7b"
+path="res://.godot/imported/Boss Appears.wav-47f4ebec320bab26c99f46e542a04c2d.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Boss Appears.wav"
+dest_files=["res://.godot/imported/Boss Appears.wav-47f4ebec320bab26c99f46e542a04c2d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

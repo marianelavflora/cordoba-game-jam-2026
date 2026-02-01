@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bmtv2nxfab14h"
+path="res://.godot/imported/Boss Attacks.wav-dbd95517164a22b06da616601593f842.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Boss Attacks.wav"
+dest_files=["res://.godot/imported/Boss Attacks.wav-dbd95517164a22b06da616601593f842.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

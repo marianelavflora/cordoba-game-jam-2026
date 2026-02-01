@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://svjnuo3jweyr" path="res://src/world/rooms/room.gd" id="1_7avf4"]
 [ext_resource type="Texture2D" uid="uid://ledyb4ig0ga2" path="res://Texturas/9548.jpg" id="2_wasvu"]
+[ext_resource type="PackedScene" uid="uid://nuwtpmjln7tl" path="res://src/characters/enemies/enemy1/enemy1.tscn" id="3_lrux5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
 albedo_texture = ExtResource("2_wasvu")
@@ -58,3 +59,6 @@ size = Vector3(0.2, 1.825, 13.379)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
+
+[node name="Enemy1" parent="." unique_id=405373915 instance=ExtResource("3_lrux5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5265217, 0, 0)

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4xsmhxk5rmas"
+path="res://.godot/imported/Child Dies.wav-16d96f3766745012e6813e6dedc6304c.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Child Dies.wav"
+dest_files=["res://.godot/imported/Child Dies.wav-16d96f3766745012e6813e6dedc6304c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

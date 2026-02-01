@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ckg5o3hwgqc0n"
+path="res://.godot/imported/Child Get Hitted 2.wav-ef2be755ab42d3e533e85357687eefb8.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Child Get Hitted 2.wav"
+dest_files=["res://.godot/imported/Child Get Hitted 2.wav-ef2be755ab42d3e533e85357687eefb8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
