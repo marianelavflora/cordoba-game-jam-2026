@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://svjnuo3jweyr" path="res://src/world/rooms/room.gd" id="1_7avf4"]
 [ext_resource type="Texture2D" uid="uid://ledyb4ig0ga2" path="res://Texturas/9548.jpg" id="2_wasvu"]
-[ext_resource type="PackedScene" uid="uid://nuwtpmjln7tl" path="res://src/characters/enemies/enemy1/enemy1.tscn" id="3_lrux5"]
-[ext_resource type="PackedScene" uid="uid://tldtdmn6ra7f" path="res://src/characters/enemies/enemy2/enemy2.tscn" id="4_f5q8f"]
+[ext_resource type="PackedScene" uid="uid://bbvs13wvfh5rs" path="res://src/characters/enemies/boss/boss.tscn" id="3_lrux5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
 albedo_texture = ExtResource("2_wasvu")
@@ -61,8 +60,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20947266, 0)
 operation = 2
 size = Vector3(1, 4, 1)
 
-[node name="Enemy1" parent="." unique_id=405373915 instance=ExtResource("3_lrux5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.551742, 0, -3.568397)
-
-[node name="Enemy2" parent="." unique_id=314546949 instance=ExtResource("4_f5q8f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.119919, 0, 2.0870113)
+[node name="Boss" parent="." unique_id=1596133977 instance=ExtResource("3_lrux5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3826437, 0, -2.5249305)

@@ -21,15 +21,20 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	# Evita que el jugador se auto-hitee al disparar
+	if body == null:
+		return
+
+	# Ignora al que disparó la bala
 	if body == shooter:
 		return
 
-	# Hardening extra: si el Player está en el grupo "player", también lo ignoramos
-	if body.is_in_group("player"):
+	# Daño a enemigos
+	if body.is_in_group("enemy") and body.has_method("take_damage"):
+		body.take_damage(damage)
+		queue_free()
 		return
 
+	# Daño a otros cuerpos que tengan take_damage (opcional)
 	if body.has_method("take_damage"):
-		body.call("take_damage", damage)
-
-	queue_free()
+		body.take_damage(damage)
+		queue_free()

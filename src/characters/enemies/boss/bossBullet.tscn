@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d00u3cnkefrn1"]
+
+[ext_resource type="ArrayMesh" uid="uid://camx1cg5drrs4" path="res://assets/objs/Hearth001.obj" id="1_2uvl8"]
+[ext_resource type="Script" uid="uid://of541gfmt1hi" path="res://src/characters/enemies/boss/bossBullet.gd" id="1_f8vhd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f8vhd"]
+
+[node name="BossBullet" type="Area3D" unique_id=1827706350]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+script = ExtResource("1_f8vhd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1679584343]
+transform = Transform3D(0.92, 0, 0, 0, 1.53, 0, 0, 0, 1.7249999, 0, -0.5806118, 0)
+shape = SubResource("BoxShape3D_f8vhd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1355887650]
+transform = Transform3D(-0.0026930436, -5.820766e-11, 0.024854528, -0.024809694, 0.0015009529, -0.002688186, -0.0014922188, -0.024954902, -0.00016168534, 0, -0.46754962, 0)
+mesh = ExtResource("1_2uvl8")

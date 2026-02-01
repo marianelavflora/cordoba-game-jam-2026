@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bbvs13wvfh5rs"]
+
+[ext_resource type="Script" uid="uid://vkrk4nj8xei5" path="res://src/characters/enemies/boss/boss.gd" id="1_cnl72"]
+[ext_resource type="ArrayMesh" uid="uid://ketw4g83eu0a" path="res://assets/objs/Stove001.obj" id="1_edve1"]
+[ext_resource type="PackedScene" uid="uid://d00u3cnkefrn1" path="res://src/characters/enemies/boss/bossBullet.tscn" id="2_ba24a"]
+[ext_resource type="ArrayMesh" uid="uid://bw4okjat73d66" path="res://assets/objs/Personaje001.obj" id="2_dqxfg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cnl72"]
+
+[node name="Boss" type="CharacterBody3D" unique_id=1596133977 groups=["enemy"]]
+script = ExtResource("1_cnl72")
+bullet_scene = ExtResource("2_ba24a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=291892315]
+transform = Transform3D(1.55, 0, 0, 0, 1.69, 0, 0, 0, 1.34, 0.33, 0.759, -0.03)
+shape = SubResource("BoxShape3D_cnl72")
+
+[node name="MeshAlive" type="MeshInstance3D" parent="." unique_id=59556676]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 1.1786394, 0.56550944, -1.9976233)
+mesh = ExtResource("1_edve1")
+
+[node name="MeshDead" type="MeshInstance3D" parent="." unique_id=30166739]
+visible = false
+mesh = ExtResource("2_dqxfg")
