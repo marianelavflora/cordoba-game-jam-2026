@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://svjnuo3jweyr" path="res://src/world/rooms/room.gd" id="1_7avf4"]
 [ext_resource type="Texture2D" uid="uid://ledyb4ig0ga2" path="res://Texturas/9548.jpg" id="2_wasvu"]
+[ext_resource type="Texture2D" path="res://Texturas/wall_mall.png" id="2_walls"]
 [ext_resource type="PackedScene" uid="uid://nuwtpmjln7tl" path="res://src/characters/enemies/enemy1/enemy1.tscn" id="3_lrux5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wasvu"]
@@ -9,6 +10,17 @@ albedo_texture = ExtResource("2_wasvu")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv2_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_walls"]
+albedo_texture = ExtResource("2_walls")
+albedo_color = Color(1, 1, 1, 1)
+uv1_scale = Vector3(2.0, 2.0, 2.0)
+uv1_triplanar = true
+roughness = 0.85
+metallic = 0.0
+rim_enabled = true
+rim = 0.12
+rim_tint = 0.04
 
 [node name="Room" type="Node3D" unique_id=1368666116]
 script = ExtResource("1_7avf4")
@@ -22,6 +34,7 @@ size = Vector3(13.5, 0, 10)
 
 [node name="WallLeft" type="CSGBox3D" parent="Walls" unique_id=1186036740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.616198, 0.9125366, 0)
+material_override = SubResource("StandardMaterial3D_walls")
 use_collision = true
 size = Vector3(0.2, 1.825, 10)
 
@@ -32,6 +45,7 @@ size = Vector3(1, 4, 1)
 
 [node name="WallRight" type="CSGBox3D" parent="Walls" unique_id=2113532230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.609336, 0.9125366, 0)
+material_override = SubResource("StandardMaterial3D_walls")
 use_collision = true
 size = Vector3(0.2, 1.825, 10)
 
@@ -42,6 +56,7 @@ size = Vector3(1, 4, 1)
 
 [node name="WallBottom" type="CSGBox3D" parent="Walls" unique_id=359396392]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.033164486, 0.9125366, 4.8358307)
+material_override = SubResource("StandardMaterial3D_walls")
 use_collision = true
 size = Vector3(0.38085938, 1.8250732, 13.3573)
 
@@ -52,6 +67,7 @@ size = Vector3(1, 4, 1)
 
 [node name="WallTop" type="CSGBox3D" parent="Walls" unique_id=260152024]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.022361295, 0.9125366, -4.9153976)
+material_override = SubResource("StandardMaterial3D_walls")
 use_collision = true
 size = Vector3(0.2, 1.825, 13.379)
 
