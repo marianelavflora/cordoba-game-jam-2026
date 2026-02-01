@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://docupuypoiji8" path="res://src/characters/player/player.gd" id="1_bxhu7"]
 [ext_resource type="ArrayMesh" uid="uid://0qh0fh3p6ubj" path="res://assets/objs/Personaje002.obj" id="2_7nd6e"]
+[ext_resource type="Texture2D" uid="uid://dl61fmjawxvb" path="res://assets/fbxs/Sin título-1.png" id="3_5c1al"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nd6e"]
 albedo_color = Color(0.8644701, 0.6866816, 0.7040334, 1)
@@ -26,3 +27,7 @@ shape = SubResource("CapsuleShape3D_bxhu7")
 
 [node name="Muzzle" type="Node3D" parent="." unique_id=783485655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=568354488]
+transform = Transform3D(1.2, 0, 0, 0, 0.15276843, 1.1902361, 0, -1.1902361, 0.15276843, 0, -0.0741332, -0.004878804)
+texture = ExtResource("3_5c1al")
